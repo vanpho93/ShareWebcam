@@ -13,6 +13,24 @@ app.set('views', './views');
 
 app.get('/', (req, res) => res.render('home'));
 
-io.on('connection', socket => {
+class User {
+    constructor(id, username) {
+        this.id = id;
+        this.username = username;
+    }
+}
 
+const arrUser = [];
+
+io.on('connection', socket => {
+    socket.on('DANG_KY_USER', username => {
+        if (arrUser.every(e => e.username !== username)) {
+            const user = new User(socket.id, username);
+            arrUser.push(user);
+            socket.broadcast.emit('NGUOI_DUNG_MOI', user);
+            socket.emit('XAC_NHAN_DANG_KY', arrUser);
+        } else {
+            socket.emit('XAC_NHAN_DANG_KY', false);
+        }
+    });
 });

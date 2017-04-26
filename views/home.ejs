@@ -5,14 +5,58 @@
     <title>Khoa Pham Chat</title>
     <script src="bundle.js"></script>
     <style>
+        div {
+            display: flex
+        }
+        
+        h3 {
+            color: #829090
+        }
+        
+        body {
+            background-color: #062029
+        }
+        
         hr {
             visibility: hidden;
         }
+        
+        #div-dang-ky {
+            height: 500px;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: stretch;
+        }
+        
+        #btn-dang-ky {
+            height: 30px;
+            color: #5E7500;
+            font-weight: bold;
+            background-color: #89A0A6;
+            width: 100;
+        }
+        
+        #txt-username {
+            height: 25px;
+            font-size: 30;
+            width: 100;
+        }
     </style>
 </head>
-
+ 
 <body>
-    <h3>CHAT KHOA PHAM</h3>
+    <h3>CHAT WEBRTC KHOA PHAM</h3>
+    <div id="div-dang-ky">
+        <input type="text" id="txt-username" placeholder="Nhập username của bạn" />
+        <br />
+        <button id="btn-dang-ky">ĐĂNG KÝ</button>
+    </div>
+
+    <div id="div-chat">
+        <h3>CHAT HERE!!!</h3>
+        <ul id="ul-user"></ul>
+    </div>
 </body>
 
 </html>
