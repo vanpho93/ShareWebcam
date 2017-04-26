@@ -3,6 +3,7 @@ const io = require('socket.io-client');
 
 const renderList = require('./util/renderListUser');
 const addUserToList = require('./util/addUserToList');
+const removeUserFromList = require('./util/removeUser');
 
 $('document').ready(() => {
     const socket = io();
@@ -18,6 +19,9 @@ $('document').ready(() => {
             renderList(arrUser);
             socket.on('NGUOI_DUNG_MOI', user => {
                 addUserToList(user);
+            });
+            socket.on('NGUOI_DUNG_DISCONNECT', socketId => {
+                removeUserFromList(socketId);
             });
         }
     });

@@ -33,4 +33,8 @@ io.on('connection', socket => {
             socket.emit('XAC_NHAN_DANG_KY', false);
         }
     });
+
+    socket.on('disconnect', () => {
+        io.emit('NGUOI_DUNG_DISCONNECT', socket.id);
+    });
 });

@@ -10335,6 +10335,7 @@ const io = __webpack_require__(23);
 
 const renderList = __webpack_require__(54);
 const addUserToList = __webpack_require__(55);
+const removeUserFromList = __webpack_require__(56);
 
 $('document').ready(() => {
     const socket = io();
@@ -10350,6 +10351,9 @@ $('document').ready(() => {
             renderList(arrUser);
             socket.on('NGUOI_DUNG_MOI', user => {
                 addUserToList(user);
+            });
+            socket.on('NGUOI_DUNG_DISCONNECT', socketId => {
+                removeUserFromList(socketId);
             });
         }
     });
@@ -18582,6 +18586,16 @@ const renderListUser = (user) => {
 };
 
 module.exports = renderListUser;
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const $ = __webpack_require__(0);
+
+const removeUser = id => $(`#${id}`).remove();
+module.exports = removeUser;
 
 
 /***/ })
