@@ -18369,10 +18369,7 @@ function toArray(list, index) {
 
 const $ = __webpack_require__(4);
 const io = __webpack_require__(22);
-
-const renderList = __webpack_require__(25);
-const addUserToList = __webpack_require__(23);
-const removeUserFromList = __webpack_require__(24);
+const listHandler = __webpack_require__(57);
 
 $('document').ready(() => {
     const socket = io();
@@ -18381,21 +18378,7 @@ $('document').ready(() => {
         const username = $('#txt-username').val();
         socket.emit('DANG_KY_USER', username);
     });
-    socket.on('XAC_NHAN_DANG_KY', arrUser => {
-        if (arrUser) {
-            $('#div-chat').show();
-            $('#div-dang-ky').hide();
-            renderList(arrUser);
-            socket.on('NGUOI_DUNG_MOI', user => {
-                addUserToList(user);
-            });
-            socket.on('NGUOI_DUNG_DISCONNECT', socketId => {
-                removeUserFromList(socketId);
-            });
-        } else {
-            alert('Username đã có người sử dụng, vui lòng chọn username khác');
-        }
-    });
+    socket.on('XAC_NHAN_DANG_KY', listHandler(socket));
 });
 
 
@@ -18599,6 +18582,38 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const $ = __webpack_require__(4);
+
+const renderList = __webpack_require__(25);
+const addUserToList = __webpack_require__(23);
+const removeUserFromList = __webpack_require__(24);
+
+const listHandler = socket => {
+    const f = arrUser => {
+        if (arrUser) {
+            $('#div-chat').show();
+            $('#div-dang-ky').hide();
+            renderList(arrUser);
+            socket.on('NGUOI_DUNG_MOI', user => {
+                addUserToList(user);
+            });
+            socket.on('NGUOI_DUNG_DISCONNECT', socketId => {
+                removeUserFromList(socketId);
+            });
+        } else {
+            alert('Username đã có người sử dụng, vui lòng chọn username khác');
+        }
+    };
+    return f;
+};
+
+module.exports = listHandler;
+
 
 /***/ })
 /******/ ]);

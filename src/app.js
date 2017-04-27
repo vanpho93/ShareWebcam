@@ -1,9 +1,6 @@
 const $ = require('jquery');
 const io = require('socket.io-client');
-
-const renderList = require('./util/renderListUser');
-const addUserToList = require('./util/addUserToList');
-const removeUserFromList = require('./util/removeUser');
+const listHandler = require('./listHandler');
 
 $('document').ready(() => {
     const socket = io();
@@ -12,19 +9,5 @@ $('document').ready(() => {
         const username = $('#txt-username').val();
         socket.emit('DANG_KY_USER', username);
     });
-    socket.on('XAC_NHAN_DANG_KY', arrUser => {
-        if (arrUser) {
-            $('#div-chat').show();
-            $('#div-dang-ky').hide();
-            renderList(arrUser);
-            socket.on('NGUOI_DUNG_MOI', user => {
-                addUserToList(user);
-            });
-            socket.on('NGUOI_DUNG_DISCONNECT', socketId => {
-                removeUserFromList(socketId);
-            });
-        } else {
-            alert('Username đã có người sử dụng, vui lòng chọn username khác');
-        }
-    });
+    socket.on('XAC_NHAN_DANG_KY', listHandler(socket));
 });
