@@ -13726,7 +13726,7 @@ exports.Socket = __webpack_require__(18);
 const $ = __webpack_require__(4);
 
 const renderListUser = (user) => {
-    $('#ul-user').append(`<li id="${user.id}"><p class="li-user">${user.username}</p></li>`);
+    $('#ul-user').append(`<div id="${user.id}" class="li-user">${user.username}</div>`);
 };
 
 module.exports = renderListUser;
@@ -13751,7 +13751,7 @@ const $ = __webpack_require__(4);
 const renderListUser = (list) => {
     list.forEach(e => {
         if (e.username !== $('#p-my-name').text()) {
-            const html = `<li id="${e.id}"><p class="li-user">${e.username}</p></li>`;
+            const html = `<div id="${e.id}" class="li-user">${e.username}</div>`;
             $('#ul-user').append(html);
         }
     });
@@ -18388,8 +18388,16 @@ $('document').ready(() => {
     });
     socket.on('XAC_NHAN_DANG_KY', listHandler(socket));
 
-    $('#ul-user').on('click', 'li', function () {
+    $('#ul-user').on('click', 'div', function () {
+        alert(1);// eslint-disable-line
         const socketId = $(this).attr('id');
+        const name = $(this).html();
+        $('#tr-video').append(`
+            <td border="1" width="50%">
+                <div class="div-my-name">${name}</div>
+                <video style="width:345px; height:300px; margin:0; padding:0"></video>
+            </td>
+        `);
         call(socket, socketId);
     });
 
@@ -18646,12 +18654,15 @@ const call = (socket, idReceiver) => {
             console.log('idReceiver === ', idReceiver);
             socket.emit('CALL_OTHER', { idReceiver, signal });
         });
-
         socket.on('ACCEPT_SIGNAL', signal => peer.signal(signal));
 
         peer.on('stream', friendStream => {
             console.log('GOT AN STREAM HERE');
             playFriendVideo(friendStream);
+        });
+
+        peer.on('close', () => {
+            alert('Cuộc gọi đã kết thúc');// eslint-disable-line
         });
     });
 };
@@ -18667,8 +18678,14 @@ module.exports = call;
 
 const playFriendVideo = (stream) => {
     const video = document.querySelectorAll('video')[1];// eslint-disable-line
-    video.src = window.URL.createObjectURL(stream);// eslint-disable-line
-    video.play();
+    if (video.src === '') {
+        video.src = window.URL.createObjectURL(stream);// eslint-disable-line
+        video.play();
+    } else {
+        const video2 = document.querySelectorAll('video')[2];
+        video2.src = window.URL.createObjectURL(stream);// eslint-disable-line
+        video2.play();
+    }
 };
 
 module.exports = playFriendVideo;
@@ -25072,24 +25089,31 @@ module.exports = playMyStream;
 /* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
+const $ = __webpack_require__(4);
 const openCamera = __webpack_require__(89);
 const createReceivePeer = __webpack_require__(92);
 const playFriendVideo = __webpack_require__(59);
 
 const onReceiveSignal = (socket, data) => {
-    const { senderSignal, senderId } = data;
+    const { senderSignal, senderId, username } = data;
+    $('#tr-video').append(`
+        <td border="1" width="50%">
+            <div class="div-my-name">${username}</div>
+            <video style="width:345px; height:300px; margin:0; padding:0"></video>
+        </td>
+    `);
     openCamera()
-    .then(stream => {
-        const peer = createReceivePeer(stream);
-        peer.signal(senderSignal);
-        peer.on('signal', signal => {
-            socket.emit('ACCEPT_CALL', { receiverId: senderId, signal });
+        .then(stream => {
+            const peer = createReceivePeer(stream);
+            peer.signal(senderSignal);
+            peer.on('signal', signal => {
+                socket.emit('ACCEPT_CALL', { receiverId: senderId, signal });
+            });
+            peer.on('stream', friendStream => {
+                console.log('GOT AN STREAM HERE');
+                playFriendVideo(friendStream);
+            });
         });
-        peer.on('stream', friendStream => {
-            console.log('GOT AN STREAM HERE');
-            playFriendVideo(friendStream);
-        });
-    });
 };
 
 module.exports = onReceiveSignal;

@@ -1,57 +1,63 @@
-div {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-}
-h3 {
-    color: #829090
-}
-body {
-    background-color: #062029
-}
-hr {
-    visibility: hidden;
-}
-#div-dang-ky {
-    height: 500px;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: stretch;
-}
-#btn-dang-ky {
-    height: 30px;
-    color: #5E7500;
-    font-weight: bold;
-    background-color: #89A0A6;
-    width: 100;
-}
-#txt-username {
-    height: 25px;
-    font-size: 30;
-    width: 100;
+body{background-color: black; text-align: center; font-size: 20px}
+#txt-username, #btn-dang-ky{margin:20px; height:70px; padding:20px; font-size: 30px; text-align: center}
+
+#div-chat-left{width:700px}
+#p-my-name{color:white; background-color: red; margin-left:1px; border:solid 1px #f2c7bf; padding:10px; text-transform: uppercase; border-bottom:none}
+.div-my-name{color:white; background-color: red; margin-left:1px; border:solid 1px #f2c7bf; padding:10px; text-transform: uppercase; border-bottom:none}
+#me{width:700px;height:500px; border: 1px solid #f2c7bf;}
+#ul-user{
+    text-align: center;
+    margin: auto;
+    display: block;
+    padding: 0 40%;
 }
 .li-user {
-    color: #748900;
-}
-#div-chat {
-    flex-direction: column
-}
-#ul-user {
+    color: white;
+    float: left;
+    margin-left: 10px;
+    text-align: center;
+    margin: auto;
+    padding: 20px;
     list-style-type: none;
 }
-hr {
-    visibility: hidden;
+@media (max-width:1100px){
+    #ul-user{
+        
+        padding: 0 40%;
+    
+    }
 }
-#div-chat {
-    flex-direction: row;
-    justify-content: space-between;
+@media (max-width:920px){
+    #ul-user{
+        padding: 0 25%;
+    
+    }
 }
-#div-chat-left {
-    width: 600px;
+@media (max-width:820px){
+    #ul-user{
+        padding: 0 20%;
+    
+    }
 }
-#p-my-name {
-    color: #2578CA;
-    font-size: 20px;
-    margin-left: 10px;
+@media (max-width:760px){
+    #ul-user{
+        padding: 0 16%;
+    }
+    
+}
+@media (max-width:647px){
+    #ul-user{
+        padding: 0 13%;
+    }
+    
+}
+@media (max-width:547px){
+    #ul-user{
+        padding: 0 20%;
+    }
+    
+    .li-user {
+        padding: 10px;
+    }
+    
 }

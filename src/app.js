@@ -14,8 +14,16 @@ $('document').ready(() => {
     });
     socket.on('XAC_NHAN_DANG_KY', listHandler(socket));
 
-    $('#ul-user').on('click', 'li', function () {
+    $('#ul-user').on('click', 'div', function () {
+        alert(1);// eslint-disable-line
         const socketId = $(this).attr('id');
+        const name = $(this).html();
+        $('#tr-video').append(`
+            <td border="1" width="50%">
+                <div class="div-my-name">${name}</div>
+                <video style="width:345px; height:300px; margin:0; padding:0"></video>
+            </td>
+        `);
         call(socket, socketId);
     });
 

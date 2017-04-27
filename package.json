@@ -4,6 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/vanpho93/Facetime.git",
   "author": "Van Pho Nguyen <vanpho02@gmail.com>",
+  "scripts": {
+    "start": "node index"
+  },
   "license": "MIT",
   "dependencies": {
     "ejs": "^2.5.6",

@@ -5,7 +5,7 @@ const server = require('http').Server(app);
 
 const io = require('socket.io')(server);
 
-server.listen(3000, () => console.log('Server started'));
+server.listen(process.env.PORT || 3000, () => console.log('Server started'));
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -42,8 +42,9 @@ io.on('connection', socket => {
 
     socket.on('CALL_OTHER', (data) => {
         const { idReceiver, signal } = data;
+        const username = arrUser.find(e => e.id === socket.id).username;
         socket.broadcast.to(idReceiver)
-        .emit('SOMEONE_CALL', { senderSignal: signal, senderId: socket.id });
+        .emit('SOMEONE_CALL', { senderSignal: signal, senderId: socket.id, username });
     });
 
     socket.on('ACCEPT_CALL', data => {

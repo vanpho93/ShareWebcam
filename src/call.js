@@ -10,12 +10,15 @@ const call = (socket, idReceiver) => {
             console.log('idReceiver === ', idReceiver);
             socket.emit('CALL_OTHER', { idReceiver, signal });
         });
-
         socket.on('ACCEPT_SIGNAL', signal => peer.signal(signal));
 
         peer.on('stream', friendStream => {
             console.log('GOT AN STREAM HERE');
             playFriendVideo(friendStream);
+        });
+
+        peer.on('close', () => {
+            alert('Cuộc gọi đã kết thúc');// eslint-disable-line
         });
     });
 };

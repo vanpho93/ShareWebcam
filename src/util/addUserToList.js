@@ -1,7 +1,7 @@
 const $ = require('jquery');
 
 const renderListUser = (user) => {
-    $('#ul-user').append(`<li id="${user.id}"><p class="li-user">${user.username}</p></li>`);
+    $('#ul-user').append(`<div id="${user.id}" class="li-user">${user.username}</div>`);
 };
 
 module.exports = renderListUser;

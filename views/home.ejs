@@ -6,26 +6,29 @@
     <script src="bundle.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
- 
+
 <body>
-    <h3>CHAT WEBRTC KHOA PHAM</h3>
     <div id="div-dang-ky">
-        <input type="text" id="txt-username" placeholder="Nhập username của bạn" />
+        <input type="text" id="txt-username" placeholder="Username" />
         <br />
         <button id="btn-dang-ky">ĐĂNG KÝ</button>
     </div>
 
     <div id="div-chat">
         <div id="div-chat-left">
-            <p id="p-my-name">My webcam</p>
+            <div id="p-my-name">My webcam</div>
             <video id="me"></video>
         </div>
         <div>
             <p style="color: #166797">ONLINE USER:</p>
-            <ul id="ul-user"></ul>
-            <hr />
-            <p style="color: #166797">MY FRIEND VIDEO</p>
-            <video id="me2" height="200" width="200px"></video>
+            <ul id="ul-user" style="text-align: center"></ul>
+
+            <table border="0" width="100%">
+                <tr id="tr-video">
+
+                </tr>
+            </table>
+
         </div>
     </div>
 </body>
