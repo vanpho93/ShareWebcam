@@ -18392,6 +18392,8 @@ $('document').ready(() => {
             socket.on('NGUOI_DUNG_DISCONNECT', socketId => {
                 removeUserFromList(socketId);
             });
+        } else {
+            alert('Username đã có người sử dụng, vui lòng chọn username khác');
         }
     });
 });

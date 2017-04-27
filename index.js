@@ -35,6 +35,8 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
+        const index = arrUser.findIndex(e => e.id === socket.id);
+        arrUser.splice(index, 1);
         io.emit('NGUOI_DUNG_DISCONNECT', socket.id);
     });
 });
