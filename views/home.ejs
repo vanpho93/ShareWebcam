@@ -4,59 +4,7 @@
 <head>
     <title>Khoa Pham Chat</title>
     <script src="bundle.js"></script>
-    <style>
-        div {
-            display: flex
-        }
-        
-        h3 {
-            color: #829090
-        }
-        
-        body {
-            background-color: #062029
-        }
-        
-        hr {
-            visibility: hidden;
-        }
-        
-        #div-dang-ky {
-            height: 500px;
-            flex-direction: column;
-            width: 100%;
-            justify-content: center;
-            align-items: stretch;
-        }
-        
-        #btn-dang-ky {
-            height: 30px;
-            color: #5E7500;
-            font-weight: bold;
-            background-color: #89A0A6;
-            width: 100;
-        }
-        
-        #txt-username {
-            height: 25px;
-            font-size: 30;
-            width: 100;
-        }
-
-        .li-user {
-            color: #748900;
-        }
-
-        #div-chat {
-            flex-direction: column
-        }
-        #ul-user {
-            list-style-type: none;
-        }
-        hr {
-            visibility: hidden;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
  
 <body>
@@ -68,12 +16,17 @@
     </div>
 
     <div id="div-chat">
-        <h3>CHAT HERE!!!</h3>
-        <ul id="ul-user"></ul>
-        <p>My video</p>
-        <video id="me" height="200" width="200px"></video>
-        <p>My friend video</p>
-        <video id="me2" height="200" width="200px"></video>
+        <div id="div-chat-left">
+            <p id="p-my-name">My webcam</p>
+            <video id="me"></video>
+        </div>
+        <div>
+            <p style="color: #166797">ONLINE USER:</p>
+            <ul id="ul-user"></ul>
+            <hr />
+            <p style="color: #166797">MY FRIEND VIDEO</p>
+            <video id="me2" height="200" width="200px"></video>
+        </div>
     </div>
 </body>
 

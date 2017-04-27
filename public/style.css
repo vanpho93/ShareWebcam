@@ -1,0 +1,57 @@
+div {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+h3 {
+    color: #829090
+}
+body {
+    background-color: #062029
+}
+hr {
+    visibility: hidden;
+}
+#div-dang-ky {
+    height: 500px;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+}
+#btn-dang-ky {
+    height: 30px;
+    color: #5E7500;
+    font-weight: bold;
+    background-color: #89A0A6;
+    width: 100;
+}
+#txt-username {
+    height: 25px;
+    font-size: 30;
+    width: 100;
+}
+.li-user {
+    color: #748900;
+}
+#div-chat {
+    flex-direction: column
+}
+#ul-user {
+    list-style-type: none;
+}
+hr {
+    visibility: hidden;
+}
+#div-chat {
+    flex-direction: row;
+    justify-content: space-between;
+}
+#div-chat-left {
+    width: 600px;
+}
+#p-my-name {
+    color: #2578CA;
+    font-size: 20px;
+    margin-left: 10px;
+}

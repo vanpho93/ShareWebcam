@@ -9,6 +9,7 @@ $('document').ready(() => {
     $('#div-chat').hide();
     $('#btn-dang-ky').click(() => {
         const username = $('#txt-username').val();
+        $('#p-my-name').text(username);
         socket.emit('DANG_KY_USER', username);
     });
     socket.on('XAC_NHAN_DANG_KY', listHandler(socket));

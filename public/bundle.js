@@ -13749,7 +13749,12 @@ module.exports = removeUser;
 const $ = __webpack_require__(4);
 
 const renderListUser = (list) => {
-    list.forEach(e => $('#ul-user').append(`<li id="${e.id}"><p class="li-user">${e.username}</p></li>`));
+    list.forEach(e => {
+        if (e.username !== $('#p-my-name').text()) {
+            const html = `<li id="${e.id}"><p class="li-user">${e.username}</p></li>`;
+            $('#ul-user').append(html);
+        }
+    });
 };
 
 module.exports = renderListUser;
@@ -18378,6 +18383,7 @@ $('document').ready(() => {
     $('#div-chat').hide();
     $('#btn-dang-ky').click(() => {
         const username = $('#txt-username').val();
+        $('#p-my-name').text(username);
         socket.emit('DANG_KY_USER', username);
     });
     socket.on('XAC_NHAN_DANG_KY', listHandler(socket));
