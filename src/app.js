@@ -15,9 +15,9 @@ $('document').ready(() => {
     socket.on('XAC_NHAN_DANG_KY', listHandler(socket));
 
     $('#ul-user').on('click', 'div', function () {
-        alert(1);// eslint-disable-line
         const socketId = $(this).attr('id');
         const name = $(this).html();
+        alert('Bạn đang gọi cho ' + name);
         $('#tr-video').append(`
             <td border="1" width="50%">
                 <div class="div-my-name">${name}</div>
