@@ -39,4 +39,15 @@ io.on('connection', socket => {
         arrUser.splice(index, 1);
         io.emit('NGUOI_DUNG_DISCONNECT', socket.id);
     });
+
+    socket.on('CALL_OTHER', (data) => {
+        const { idReceiver, signal } = data;
+        socket.broadcast.to(idReceiver)
+        .emit('SOMEONE_CALL', { senderSignal: signal, senderId: socket.id });
+    });
+
+    socket.on('ACCEPT_CALL', data => {
+        const { receiverId, signal } = data;
+        socket.broadcast.to(receiverId).emit('ACCEPT_SIGNAL', signal);
+    });
 });
